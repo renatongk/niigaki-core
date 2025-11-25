@@ -43,7 +43,7 @@ supabase db execute --file database/migrations/001_create_tenants.sql
 # Connect to your database
 psql -h <host> -U <user> -d <database>
 
-# Run migrations in order
+# Run migrations in order (ORDER IS IMPORTANT!)
 \i database/migrations/001_create_tenants.sql
 \i database/migrations/002_create_stores.sql
 \i database/migrations/003_create_users.sql
@@ -60,9 +60,11 @@ psql -h <host> -U <user> -d <database>
 ### Using Migration Script
 
 ```bash
-# All at once
+# All at once (migrations are numbered to ensure correct order)
 cat database/migrations/*.sql | psql -h <host> -U <user> -d <database>
 ```
+
+> **Important**: Migrations must be run in numerical order. Migration 001 creates shared dependencies (enum types, utility functions) used by subsequent migrations.
 
 ## Schema Overview
 

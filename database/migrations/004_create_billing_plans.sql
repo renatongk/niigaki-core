@@ -71,4 +71,4 @@ COMMENT ON TABLE billing_plans IS 'Available subscription plans for tenants';
 COMMENT ON COLUMN billing_plans.code IS 'Unique plan identifier for API use';
 COMMENT ON COLUMN billing_plans.price_in_cents IS 'Price in smallest currency unit to avoid float issues';
 COMMENT ON COLUMN billing_plans.features IS 'Array of feature flags included in this plan';
-COMMENT ON COLUMN billing_plans.limits IS 'Resource limits for this plan';
+COMMENT ON COLUMN billing_plans.limits IS 'Resource limits for this plan. Use -1 for unlimited';

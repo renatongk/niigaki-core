@@ -73,9 +73,11 @@ COMMENT ON COLUMN audit_logs.new_values IS 'New values after the change';
 -- (Optional - uncomment for large-scale deployments)
 -- ============================================
 
+-- Example partition setup (adjust dates as needed):
 -- CREATE TABLE audit_logs (
 --   ...
 -- ) PARTITION BY RANGE (created_at);
 -- 
--- CREATE TABLE audit_logs_y2024m01 PARTITION OF audit_logs
---   FOR VALUES FROM ('2024-01-01') TO ('2024-02-01');
+-- -- Create partitions for each month:
+-- CREATE TABLE audit_logs_yYYYYmMM PARTITION OF audit_logs
+--   FOR VALUES FROM ('YYYY-MM-01') TO ('YYYY-MM+1-01');

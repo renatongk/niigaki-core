@@ -112,7 +112,8 @@ ON CONFLICT (code) DO UPDATE SET
   updated_at = NOW();
 
 -- ============================================
--- Comments
+-- Note on Limits
 -- ============================================
 
-COMMENT ON TABLE billing_plans IS 'Note: -1 in limits means unlimited';
+-- In the limits JSONB column, use -1 to represent unlimited values.
+-- Example: {"maxStores": -1, "maxUsers": -1, "maxProducts": -1, "storageQuotaMb": -1}

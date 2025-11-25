@@ -8,6 +8,7 @@
  * - Universal logging
  * - HTTP client
  * - Error handling
+ * - Billing management (ASAAS integration)
  * - Common utilities
  */
 
@@ -254,3 +255,140 @@ export {
   majorToMinor,
   math,
 } from './utils/math';
+
+// Billing module exports
+export {
+  // Billing Status
+  BillingStatus,
+  isBillingStatus,
+  isValidTransition,
+  hasFullAccess,
+  hasLimitedAccess,
+  hasAnyAccess,
+  billingStatusTransitions,
+  billingStatus,
+} from './billing/types/billing-status';
+
+export {
+  // Billing Plan
+  BillingCycle,
+  type BillingPlan,
+  type SubscriptionMetadata,
+  isBillingCycle,
+  getBillingCycleDays,
+  createDefaultSubscriptionMetadata,
+  billingPlan,
+} from './billing/types/billing-plan';
+
+export {
+  // ASAAS Events
+  AsaasEventType,
+  AsaasPaymentStatus,
+  AsaasSubscriptionStatus,
+  type AsaasWebhookEvent,
+  type AsaasPaymentPayload,
+  type AsaasSubscriptionPayload,
+  isAsaasEventType,
+  isPaymentEvent,
+  isSubscriptionEvent,
+  requiredAsaasEvents,
+  asaasEvents,
+} from './billing/types/asaas-events';
+
+export {
+  // Customer DTOs
+  type CreateCustomerDto,
+  type UpdateCustomerDto,
+  type AsaasCustomerResponse,
+  validateCreateCustomerDto,
+  customerDto,
+} from './billing/dtos/customer.dto';
+
+export {
+  // Subscription DTOs
+  type AsaasBillingType,
+  type AsaasDiscountType,
+  type AsaasFineType,
+  type CreateSubscriptionDto,
+  type UpdateSubscriptionDto,
+  type AsaasSubscriptionResponse,
+  validateCreateSubscriptionDto,
+  subscriptionDto,
+} from './billing/dtos/subscription.dto';
+
+export {
+  // Invoice DTOs
+  type ListInvoicesDto,
+  type AsaasInvoiceResponse,
+  type AsaasPaginatedResponse,
+  type Invoice,
+  toInvoice,
+  invoiceDto,
+} from './billing/dtos/invoice.dto';
+
+export {
+  // Billing Errors
+  BillingErrorCode,
+  BillingError,
+  SubscriptionCreationError,
+  SubscriptionCancellationError,
+  CustomerCreationError,
+  PaymentOverdueError,
+  WebhookInvalidError,
+  BillingStatusInvalidError,
+  AsaasApiError,
+  InvalidBillingTransitionError,
+  isBillingError,
+  billingErrors,
+} from './billing/billing-errors';
+
+export {
+  // ASAAS Client
+  type AsaasEnvironment,
+  type AsaasClientConfig,
+  AsaasClient,
+  createAsaasClient,
+  ASAAS_BASE_URLS,
+  asaasClient,
+} from './billing/asaas-client';
+
+export {
+  // Subscription Service
+  type TenantBillingData,
+  type UpdateTenantBillingCallback,
+  type GetTenantBillingCallback,
+  type SubscriptionServiceConfig,
+  type InitializeSubscriptionOptions,
+  type InitializeSubscriptionResult,
+  SubscriptionService,
+  createSubscriptionService,
+  subscriptionService,
+} from './billing/subscription-service';
+
+export {
+  // Billing Service
+  type BillableTenant,
+  type BillingServiceConfig,
+  type CreateCustomerResult,
+  BillingService,
+  createBillingService,
+  billingService,
+} from './billing/billing-service';
+
+export {
+  // Webhook Handler
+  type WebhookHandlerConfig,
+  type WebhookProcessingResult,
+  WebhookHandler,
+  createWebhookHandler,
+  webhookHandler,
+} from './billing/webhook-handler';
+
+export {
+  // Billing Enforcer
+  type BillingContext,
+  type BillingEnforcerConfig,
+  BillingEnforcer,
+  createBillingEnforcer,
+  billingEnforcer,
+} from './billing/billing-enforcer';

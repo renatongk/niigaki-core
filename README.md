@@ -194,6 +194,25 @@ enum ErrorCode {
 - [Logging Guide](docs/logging-guide.md)
 - [Tenancy Guide](docs/tenancy-guide.md)
 - [HTTP Client Guide](docs/http-client-guide.md)
+- [Billing Overview](docs/billing-overview.md)
+- [Billing Flows](docs/billing-flows.md)
+- [Billing API](docs/billing-api.md)
+- [Billing States](docs/billing-states.md)
+- [Billing Webhooks](docs/billing-webhooks.md)
+
+## Database
+
+Database migrations and seeds are available in the `database/` directory:
+
+- [Database README](database/README.md)
+
+```bash
+# Run migrations with Supabase CLI
+supabase db push
+
+# Or with psql
+cat database/migrations/*.sql | psql -h <host> -U <user> -d <database>
+```
 
 ## Development
 
@@ -248,12 +267,28 @@ niigaki-core/
 │   │   ├── tenant-context.ts # Tenant context store
 │   │   ├── tenant-resolver.ts # Tenant resolution
 │   │   └── multi-tenant-helpers.ts # Multi-tenant utilities
+│   ├── billing/
+│   │   ├── types/         # Type definitions
+│   │   │   ├── billing-status.ts
+│   │   │   ├── billing-plan.ts
+│   │   │   └── asaas-events.ts
+│   │   ├── dtos/          # Data transfer objects
+│   │   │   ├── customer.dto.ts
+│   │   │   ├── subscription.dto.ts
+│   │   │   └── invoice.dto.ts
+│   │   ├── asaas-client.ts      # ASAAS API client
+│   │   ├── billing-service.ts   # Main billing service
+│   │   ├── subscription-service.ts # Subscription lifecycle
+│   │   ├── webhook-handler.ts   # Webhook processing
+│   │   ├── billing-enforcer.ts  # Access control
+│   │   └── billing-errors.ts    # Error classes
 │   └── utils/
 │       ├── validation.ts  # Validation utilities
 │       ├── dates.ts       # Date utilities
 │       └── math.ts        # Math utilities
 ├── tests/
 │   ├── auth.spec.ts
+│   ├── billing.spec.ts
 │   ├── logging.spec.ts
 │   └── tenancy.spec.ts
 ├── docs/
@@ -261,7 +296,25 @@ niigaki-core/
 │   ├── auth-engine.md
 │   ├── logging-guide.md
 │   ├── tenancy-guide.md
-│   └── http-client-guide.md
+│   ├── http-client-guide.md
+│   ├── billing-overview.md
+│   ├── billing-flows.md
+│   ├── billing-api.md
+│   ├── billing-states.md
+│   └── billing-webhooks.md
+├── database/
+│   ├── migrations/         # SQL schema migrations
+│   │   ├── 001_create_tenants.sql
+│   │   ├── 002_create_stores.sql
+│   │   ├── 003_create_users.sql
+│   │   ├── 004_create_billing_plans.sql
+│   │   ├── 005_create_billing_history.sql
+│   │   ├── 006_create_audit_logs.sql
+│   │   ├── 007_row_level_security.sql
+│   │   └── 008_create_webhook_events.sql
+│   ├── seeds/              # Initial data
+│   │   └── 001_billing_plans.sql
+│   └── README.md
 ├── package.json
 ├── tsconfig.json
 └── vitest.config.ts

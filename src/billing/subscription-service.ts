@@ -430,7 +430,10 @@ export class SubscriptionService {
    * @returns Formatted date string
    */
   private formatDate(date: Date): string {
-    return date.toISOString().split('T')[0] ?? '';
+    // toISOString returns format: "2024-01-15T12:00:00.000Z"
+    // split('T')[0] always returns the date portion as the array is never empty
+    const parts = date.toISOString().split('T');
+    return parts[0] as string;
   }
 }
 
